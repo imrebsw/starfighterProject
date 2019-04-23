@@ -21,17 +21,17 @@ public class Ship extends MovingThing
 	{
 		this(10,10,10,10,10);
 	}
-
-	public Ship(int x, int y)
+        
+        public Ship(int x, int y)
 	{
-	   super(x, y);
-           speed = 10;  //add code here
+	  this(x, y, 50, 50);
+         //add code here
 	}
-
-	public Ship(int x, int y, int s)
+        
+        public Ship(int x, int y, int s)
 	{
-	   super(x, y);
-           speed = s;   //add code here
+	   this(x, y, 50, 50, s);
+           //add code here
 	}
 
 	public Ship(int x, int y, int w, int h, int s)
@@ -46,6 +46,7 @@ public class Ship extends MovingThing
 		catch(Exception e)
 		{
 			//feel free to do something here
+                    System.out.println(e);
 		}
 	}
 

@@ -39,6 +39,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		keys = new boolean[5];
 
 		//instantiate other instance variables
+                Ship ship = new Ship();
 		//Ship, Alien
 
 		this.addKeyListener(this);
@@ -73,9 +74,20 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 		if(keys[0] == true)
 		{
-			ship.move("LEFT");
+                    ship.move("LEFT");
 		}
-
+                
+                if(keys[1] == true){
+                    ship.move("RIGHT");
+                }
+                
+                if(keys[2] == true) {
+                    ship.move("UP");
+                }
+                
+                if (keys[3] == true) {
+                    ship.move("DOWN");
+                }
 		//add code to move Ship, Alien, etc.
 
 
