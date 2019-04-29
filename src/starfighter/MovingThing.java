@@ -3,7 +3,6 @@ package starfighter;
 //(c) A+ Computer Science
 //www.apluscompsci.com
 //Name -
-import starfighter.Moveable;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -32,21 +31,19 @@ public abstract class MovingThing implements Moveable {
         //add code here
         xPos = x;
         yPos = y;
-        width = 10;
-        height = 10;
+        width = w;
+        height = h;
     }
 
     public void setPos(int x, int y) {
         //add code here
-        xPos = x;
-        yPos = y;
-
+        setX(x);
+        setY(y);
     }
 
     public void setX(int x) {
         //add code here
         xPos = x;
-
     }
 
     public void setY(int y) {
@@ -63,11 +60,13 @@ public abstract class MovingThing implements Moveable {
     }
 
     public void setWidth(int w) {
-        width = w; //add code here
+        //add code here
+        width = w;
     }
 
     public void setHeight(int h) {
-        height = h; //add code here
+        //add code here
+        height = h;
     }
 
     public int getWidth() {
