@@ -1,50 +1,61 @@
 package starfighter;
-
 //(c) A+ Computer Science
 //www.apluscompsci.com
 //Name -
 
-import starfighter.Ammo;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import javax.imageio.ImageIO;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Bullets
+public class Ammo extends MovingThing
 {
-	private List<Ammo> ammo;
+	private int speed;
 
-	public Bullets()
+	public Ammo()
 	{
+		this(0,0,0);
 	}
 
-	public void add(Ammo al)
+	public Ammo(int x, int y)
 	{
+		super(x, y);
 	}
 
-	//post - draw each Ammo
-	public void drawEmAll( Graphics window )
+	public Ammo(int x, int y, int s)
 	{
+		super(x, y);
+		speed = s;
 	}
 
-	public void moveEmAll()
+	public void setSpeed(int s)
 	{
+		speed = s;
 	}
 
-	public void cleanEmUp()
+	public int getSpeed()
 	{
+	   return speed;
 	}
 
-	public List<Ammo> getList()
+	public void draw( Graphics window )
 	{
-		return null;
+		window.setColor(Color.GREEN);
+		window.fillRect(getX(), getY(), 10, 10);
+	}
+	
+	
+	public void move( String direction )
+	{
+		if (direction.equals("UP"))
+		{
+			setY(getY() - getSpeed());
+		}
 	}
 
 	public String toString()
 	{
-		return "";
+		return super.toString() + getSpeed();
 	}
 }
