@@ -3,68 +3,90 @@ package starfighter;
 //(c) A+ Computer Science
 //www.apluscompsci.com
 //Name -
+import java.io.File;
+import java.net.URL;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.io.File;
 import javax.imageio.ImageIO;
-import java.util.ArrayList;
-import java.util.List;
 
-public class AlienHorde {
+public class Alien extends MovingThing {
+    private boolean active;
+    private int speed;
+    private Image image;
+    private int activeDirection = (int)Math.round((Math.random()*2)-1);
 
-    private List<Alien> aliens;
+    public Alien() {
+        this(0, 0, 30, 30, 0);
+    }
 
-    public AlienHorde(int size) {
-        aliens = new ArrayList<Alien>();
-        int x=0;
-        int y=0;
-        for (int j=0; j<3;j++){
-            x=0;
-            for(int i=0; i<size; i++){
-                aliens.add(new Alien(30+x,30+y,30,30,1));
-                x+=70;
-            }
-            y+=70;
+    public Alien(int x, int y) {
+        this(x, y, 30, 30, 0);
+    }
+
+    public Alien(int x, int y, int s) {
+        this(x, y, 30, 30, 0);
+        speed = s;
+    }
+
+    public Alien(int x, int y, int w, int h, int s) {
+        super(x, y, w, h);
+        speed = s;
+        try {
+            URL url = getClass().getResource("/images/alien.jpg");
+            image = ImageIO.read(url);
+        } catch (Exception e) {
+            //feel free to do something here
         }
     }
 
-    public void add(Alien al) {
-        aliens.add(al);
+    public void setSpeed(int s) {
+        speed=s;
     }
 
-    public void drawEmAll(Graphics window) {
-        for(Alien i:aliens){
-            i.draw(window);
-        }
+    public int getSpeed() {
+        return speed;
+    }
+    
+    public boolean active(){
+        return active;
+    }
+    
+    public void setActive(boolean a){
+        active=a;
     }
 
-    public void moveEmAll() {
-        for(Alien i:aliens){
-            if(i.getX()>700){
-                i.setX(0);
-                i.setY(i.getY()+50);
-
-            }
-            i.move("RIGHT");
+    public void move(String direction) {
+        switch (direction) {
+            case "UP":
+                setY(getY() - speed);
+                break;
+            case "DOWN":
+                setY(getY() + speed);
+                break;
+            case "RIGHT":
+                setX(getX() + speed);
+                break;
+            case "LEFT":
+                setX(getX() - speed);
+                break;
         }
+
     }
 
-    public void removeDeadOnes(List<Ammo> shots) {
-        
-        for (Ammo i: shots){
-            for (Alien x: aliens){
-                if(i.getY()>=x.getY() && i.getY()<=x.getY()+x.getHeight() && i.getX()>=x.getX() && i.getX()<=x.getX()+x.getWidth()){
-                    aliens.remove(x);
-                    break;
-                }
-               
-            }
-        }
-        
+    public void draw(Graphics window) {
+        window.drawImage(image, getX(), getY(), getWidth(), getHeight(), null);
     }
 
     public String toString() {
         return "";
+    }
+
+    public int getActiveDirection() {
+        return activeDirection;
+    }
+
+    public void setActiveDirection(int activeDirection) {
+        this.activeDirection = activeDirection;
     }
 }
