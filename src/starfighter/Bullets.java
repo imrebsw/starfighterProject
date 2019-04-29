@@ -2,60 +2,48 @@ package starfighter;
 //(c) A+ Computer Science
 //www.apluscompsci.com
 //Name -
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import javax.imageio.ImageIO;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Ammo extends MovingThing
-{
-	private int speed;
+public class Bullets {
 
-	public Ammo()
-	{
-		this(0,0,0);
-	}
+    private List<Ammo> ammo;
 
-	public Ammo(int x, int y)
-	{
-		super(x, y);
-	}
+    public Bullets() {
+        ammo = new ArrayList<Ammo>();
+    }
 
-	public Ammo(int x, int y, int s)
-	{
-		super(x, y);
-		speed = s;
-	}
+    public void add(Ammo al) {
+        ammo.add(al);
+    }
 
-	public void setSpeed(int s)
-	{
-		speed = s;
-	}
+    //post - draw each Ammo
+    public void drawEmAll(Graphics window) {
+        for (Ammo i : ammo) {
+            i.draw(window);
+        }
+    }
 
-	public int getSpeed()
-	{
-	   return speed;
-	}
+    public void moveEmAll() {
+        for (Ammo i : ammo) {
+            i.move("UP");
+        }
+    }
 
-	public void draw( Graphics window )
-	{
-		window.setColor(Color.GREEN);
-		window.fillRect(getX(), getY(), 10, 10);
-	}
-	
-	
-	public void move( String direction )
-	{
-		if (direction.equals("UP"))
-		{
-			setY(getY() - getSpeed());
-		}
-	}
+    public void cleanEmUp() {
+        ammo.removeAll(ammo);
+    }
 
-	public String toString()
-	{
-		return super.toString() + getSpeed();
-	}
+    public List<Ammo> getList() {
+        return ammo;
+    }
+
+    public String toString() {
+        return "";
+    }
 }
